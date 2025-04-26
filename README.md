@@ -1,63 +1,93 @@
-# SGD-Classifier
-## AIM:
-To write a program to predict the type of species of the Iris flower using the SGD Classifier.
+### Implementation-of-Decision-Tree-Classifier-Model-for-Predicting-Employee-Churn
+### AIM:
+To write a program to implement the Decision Tree Classifier Model for Predicting Employee Churn.
 
-## Equipments Required:
-1. Hardware – PCs
-2. Anaconda – Python 3.7 Installation / Jupyter notebook
+### Equipments Required:
+Hardware – PCs
+Anaconda – Python 3.7 Installation / Jupyter notebook
 
-## Algorithm
+### Algorithm:
+1.Import Libraries and Load Dataset. 
+2. Preprocess the Data. 
+3. Split the Dataset.
+4. Train the Decision Tree Classifier.
+5. Make Predictions and Evaluate the Model
 
-1.Predict Iris Species using SGD Classifier.
+### Program:
 
-2.Load the Dataset.
-
-3.Preprocess the Data.
-
-4.Train the SGD Classifier and make Predictions.
-
-5.Evaluate the Model.
-
-## Program:
-
-/*
-Program to implement the prediction of iris species using SGD Classifier.
-Developed by:KISHORE A
-RegisterNumber:  212223110022
-*/
-
+Program to implement the Decision Tree Classifier Model for Predicting Employee Churn. 
+Developed by:RAJKUMAR G
+RegisterNumber: 212223230166
 ```
 import pandas as pd
-from sklearn.datasets import load_iris
-from sklearn.linear_model import SGDClassifier
+data=pd.read_csv("Employee.csv")
+data
+```
+```
+data["left"].value_counts()
+```
+```
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+```
+```
+data.head()
+```
+```
+data["salary"]=le.fit_transform(data["salary"])
+data
+```
+```
+x=data[["satisfaction_level","last_evaluation","number_project","time_spend_company"]]
+x.head()
+```
+```
+y=data["left"]
+```
+```
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, confusion_matrix,classification_report
-iris=load_iris()
-df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
-df['target'] = iris.target
-
-print(df.head())
-
-X = df.drop('target', axis=1)
-y = df['target']
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,random_state=42)
-sgd_clf=SGDClassifier(max_iter=1000,tol=1e-3)
-sgd_clf.fit(X_train,y_train)
-y_pred=sgd_clf.predict(X_test)
-accuracy=accuracy_score(y_test,y_pred)
-print(f"Accuracy: {accuracy:.3f}")
-cm=confusion_matrix(y_test,y_pred)
-print("Confusion Matrix:")
-print(cm)
-classification_report1=classification_report(y_test,y_pred)
-print(classification_report1)
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=100)
+```
+```
+from sklearn.tree import DecisionTreeClassifier
+dt=DecisionTreeClassifier(criterion="entropy")
+dt.fit(x_train,y_train)
+y_pred=dt.predict(x_test)
+```
+```
+from sklearn import metrics
+accuracy=metrics.accuracy_score(y_test,y_pred)
+accuracy
+```
 ```
 
-## Output:
+dt.predict([[0.5,0.8,2,9]])
+```
+### Output:
 
-![image](https://github.com/user-attachments/assets/7dd2c6a9-b09e-4da6-b752-59111eb2b5f5)
+![image](https://github.com/user-attachments/assets/33ff7d77-af5a-4bc3-8ff7-bffd7cbfb240)
 
 
-## Result:
-Thus, the program to implement the prediction of the Iris species using SGD Classifier is written and verified using Python programming.
+![image](https://github.com/user-attachments/assets/312ed089-fb6c-4752-b2de-9b53f1527984)
+
+![image](https://github.com/user-attachments/assets/566269d9-4c38-4c1e-b1a6-ba026761cf1c)
+
+![image](https://github.com/user-attachments/assets/723437db-3143-4953-b468-bef5169e7c14)
+
+
+![image](https://github.com/user-attachments/assets/3f3e072f-e01c-4977-a4e2-70c2efc44d45)
+
+
+![image](https://github.com/user-attachments/assets/e3c37bf6-1ab3-441a-8774-9e3a04faba92)
+
+
+![image](https://github.com/user-attachments/assets/175b711f-bd08-4fb0-949b-ffdea92e66f2)
+
+ 
+
+
+
+### Result:
+Thus the program to implement the Decision Tree Classifier Model for Predicting Employee Churn is written and verified using python programming.
+
+
